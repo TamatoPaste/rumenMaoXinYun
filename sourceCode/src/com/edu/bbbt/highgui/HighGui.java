@@ -1,6 +1,7 @@
 package com.edu.bbbt.highgui;
 
 import org.opencv.core.Mat;
+import org.opencv.highgui.ImageWindow;
 
 import javax.swing.*;
 import java.awt.*;
