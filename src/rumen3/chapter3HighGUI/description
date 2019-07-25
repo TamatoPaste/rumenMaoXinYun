@@ -1,0 +1,8 @@
+HighGUI 是高层GUI图形用户界面模块，包含媒体输入输出，
+视频捕捉，图像和视频的编码解码，图形交互界面的接口
+
+载入图片和显示图片只需要两句代码，对应2个函数：imread和imshow
+
+imread 在org.opencv.imgcodecs.Imgcodecs包下
+imshow 在com.edu.bbbt.highgui 包下
+imwrite 在org.opencv.imgcodecs.Imgcodecs 包下
