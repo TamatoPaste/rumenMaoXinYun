@@ -6,3 +6,65 @@ HighGUI 是高层GUI图形用户界面模块，包含媒体输入输出，
 imread 在org.opencv.imgcodecs.Imgcodecs包下
 imshow 在com.edu.bbbt.highgui 包下
 imwrite 在org.opencv.imgcodecs.Imgcodecs 包下
+
+显示创建Mat对象的七种方法(Mat中有13个构造方法)
+1 使用Mat()构造函数
+    Mat M(2,2,CV_8UC3,Scalar(0,0,255)); 对应JAVA API中的 Mat(int,int,int,Scalar)
+2 在C\C++中通过构造函数初始化，示例代码 int[] sz = {2,2,2}; Mat L(3,sz,CV_8U,scalar::all(0))，
+    这个方法应该对应Java Mat的public Mat(int[] sizes, int type, Scalar s) ，怎么试都不对
+
+3 为已存在的IPIImage指针创建信息头 IPIImage* img = cvLoadImage(); Mat mtx(img);
+4 利用create函数 M.create(4,4,CV_8UC(2))
+    C++: void Mat::create(int rows, int cols, int type)      public void create(int rows, int cols, int type)
+    C++: void Mat::create(Size size, int type)    public void create(Size size, int type)
+    C++: void Mat::create(int ndims, const int* sizes, int type)  public void create(int[] sizes, int type)
+5 采用MatLab式的初始化方式，zeros(),ones(),eyes()   Mat E = Mat::eye(4,4,CV_64F);
+zeros:  C++: static Mat Mat::zeros(int rows, int cols, int type)     public static Mat zeros(int rows, int cols, int type)
+        C++: static Mat Mat::zeros(Size size, int type)               public static Mat zeros(Size size, int type)
+        C++: static Mat Mat::zeros(int ndims, const int* sizes, int type)  public static Mat zeros(int[] sizes, int type)
+6 对小矩阵使用逗号分隔式初始化函数
+        Mat C = (Mat_<double>(3,3)<<...)
+7 为已存在的对象创建新信息头 使用clone() 或者 copyTo()函数 Mat rowClone = C.row.clone()
+
+格式化输出 没找到format函数，掠过
+
+输出其他常用数据结构
+
+常用数据结构
+点 Point类
+颜色 Scalar类，四个元素的数组，用于传递像素值
+    若定义 Scalar(a,b,c),c代表红色分量，b代表绿色分量，a代表蓝色分量，也就是BGR模式
+尺寸 Size类
+矩形 Rect类 成员变量有x,y,width,height，分别为左上角点坐标，和矩形的宽和高
+    常用方法有： 1 size() 返回Size类型
+                 2 area() 返回矩形的面积
+                 3 contains(Point)判断点是否在矩形内部
+                 4 inside(Rect) 判断矩形是否在该矩形内(Java API中没找到)
+                 5 tl() 返回左上角点坐标 br()返回右下角点坐标
+                 6 如果想求两个矩形的交集和并集，可以用Rect rect = rect1 & or | rect2;
+                 7 平移，Rect shift = rect + point;
+                   缩放 Rect scale = rect + size;
+颜色空间转换cvtColor()方法 org.opencv.imgproc.Imgproc.cvtColor();
+    该函数是OpenCv里的颜色空间转换函数，可以实现RGB颜色向HSV，HSI等颜色空间的转换，也可以转换为灰度图像。
+
+基本图像绘制
+1 绘制椭圆的ellipse()，org.opencv.imgproc.Imgproc.ellipse();
+    书中示例ellipse(img,Point(),Size,angle,0,0,360,Scalar(255,129,0),thickness,lineType)
+    对应javadoc: ellipse(img, center, axes, angle, startAngle, endAngle, color, thickness, lineType)
+
+
+5进阶
+9.5 模板匹配 matcTemplate() org.opencv.imgproc.Imgproc.matcTemplate()
+    模板匹配，是通过在输入图像上滑动图像块，对实际的图像块和输入图像进行匹配的一种匹配方法。
+10 角点检测
+
+
+
+
+
+
+
+
+
+
+
